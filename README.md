@@ -16,7 +16,7 @@ The model is trained on [esc50]("https://www.kaggle.com/datasets/mmoreaux/enviro
 
 The proposed Convolutional Neural Netowrk (CNN) based model has 6 convolutional layers, 3 pooling layers, 2 fully connected layers, 1 dropout layer with selu activation. The model taks spectrum of wav file in the form of numpy array of size (11,220) as an input and gives probability for each class in vector of size (50,1). Below is the screenshot of model's summary.
 
-![CNN](https://github.com/Akash8292/Environment_Sound_Detection/assets/97883391/9171d537-60c7-4579-9899-0f315baaed90)
+![CNN](https://github.com/Akash8292/Environment_Sound_Detection/assets/97883391/9171d537-60c7-4579-9899-0f315baaed90 | width=100)
 
 
 
