@@ -2,9 +2,9 @@
 
 ## Abstract
 
-This repository proposes a Convolutional Neural Network (CNN) based model which recognises sound of 50 different categories including nature sound, human non speech sound, urban sound, etc. with **70% accuracy**. The model reads processed spectrum of wav file and predicts the label. The wav file is processed and converted into spectrum of size (11,220) and model classifies each spectrum according to label.
+This repository presents a Convolutional Neural Network (CNN) model that can identify sounds from 50 different categories such as nature sounds, human non-speech sounds, urban sounds, etc. with an accuracy of **70%**. The model analyzes the processed spectrum of a wav file to predict its category. The wav file is processed and transformed into a spectrum of size (11,220), and the model assigns a label to each spectrum.
 
-This repository contains 8 files. The `implementation.ipynb` is the implementation code of the model, the `custom.ipynb` is to load the model and run it on custom wav file, the `wav2spectrogram.ipynb` reads the wav file and convert into spectrogram, the `wav2spectrum.ipynb` reads the wav and converts it into processed spectrum, the `requirments.txt` is the txt file containing requirments to run the model, the `categories.csv` contains categories of classification and the `instructions.txt` contains instructions to better understand this repository.
+This repository includes 8 files. The `implementation.ipynb` file contains the model's implementation code, the `custom.ipynb` file is used to load the model and run it on custom wav files, the `wav2spectrogram.ipynb` file reads a wav file and converts it into a spectrogram, the `wav2spectrum.ipynb` file reads a wav file and processes it into a spectrum, the `requirements.txt` file lists the requirements needed to run the model, the `categories.csv` file contains the classification categories, and the `instructions.txt` file offers guidance for a better understanding of this repository.
 
 
 ## Detailed
@@ -20,11 +20,11 @@ The proposed Convolutional Neural Netowrk (CNN) based model has 6 convolutional 
 
 ### Wav to Spectrum : 
 
-Before jumping into how to create spectrum, let us first understand the structure of wav file and how it is read in Python. The wav file is collection of samples like image is collection of pixels. The sample rate is the number of sample used per second to record analog audio and store in the form of digital audio. Here the sample rate is 44100 Hz and each wav file is of 5 seconds, so each wav file has 220500 samples. The wav to spectrum follows the path : Wav -> Waveform -> Spectrogram -> Spectrum.
+Before delving into creating spectrum, let's first grasp the structure of a wav file and how Python interprets it. Similar to how an image comprises pixels, a wav file consists of samples. The sample rate signifies the quantity of samples employed per second to capture analog audio and encode it into digital audio. In this scenario, the sample rate equals 44100 Hz, and every 5-second wav file encompasses 220500 samples. The transition from wav to spectrum progresses as follows: Wav -> Waveform -> Spectrogram -> Spectrum.
 
 The wav file of keyboard typing sound : <a href="https://drive.google.com/file/d/1TZlnt31opbRcwqSYLFSXRiQz_BVP7hJL/view?usp=sharing">Wav file</a>
 
-Now let us understand wav to waveform. The waveform is the distribution of amplitude vs time of wave file. We read wavefile in form of numpy array of size (220500,1) so first 440100 samples are for first second and second 440100 samples are for the 2nd second and so on. we divide the array by sample rate and get the array of shape (44100,5). The value at perticular index represents the amplitude, we plot the array to get the waveform. Below is the screenshot of the waveform. 
+Now, let's explore wav to waveform. The waveform depicts the amplitude distribution over time of a wave file. When we read a wavefile, it is in the form of a numpy array of size (220500,1) where the initial 440100 samples correspond to the first second, the subsequent 440100 samples represent the second second, and so forth. By dividing the array by the sample rate, we obtain an array of shape (44100,5). Each value at a specific index signifies the amplitude. Plotting the array generates the waveform. Attached is a screenshot displaying the waveform.
 
 ![waveform](https://github.com/karanhk/Environmental-sound-recognition/assets/76246981/4757eb37-af85-4559-bd97-792d235b4ccd)
 
@@ -32,9 +32,9 @@ The spectrogram is the colour map of distribution of frequency (in Hz) vs time (
 
 ![spectrogram](https://github.com/karanhk/Environmental-sound-recognition/assets/76246981/d4de9aab-de69-443e-8276-c22ba7cc61dd)
 
-Now the question is why do we need to create spectrum, can't we train model on spectrogram ? The answer is the spectrogram is very large, it is of the shape (44100,5). If we train model on spectrogram the model will have too many parameters and will become too much complex. And secondly this spectrogram contains noises we need to filter the spectrogram. So we convert this spectrogram into spectrum of shape (11,220).
+Now, why create a spectrum when we can train the model on the spectrogram? The spectrogram, shaped (44100,5), is quite large. Training the model directly on the spectrogram would lead to an excess of parameters, resulting in unnecessary complexity. Moreover, the spectrogram contains noise that needs filtering. Therefore, the spectrogram is transformed into a spectrum with a shape of (11,220).
 
-To convert spectrogram into spectrum we take first 220000 samples of wav file, and we create 220 spectrograms of 1000 samples. The one spectrogram contains 1000 samples, we divide this spectrogram into 11 different channels. The one channel processes first k and last k samples with the spectrogram and produces the float number. So from one spectrogram we have 11 different channles, so the spectrogram of 1000 samples is divided into vector of size (11,1). We have 220 such spectrograms, so ultimetly this 220 spectrograms gets converted into array of size (11,220). This array is for one wav file. This is how we convert wav file of 440100 samples into array of (11,220). This is the input for model. Below is the screenshot of spectrum.
+To achieve this conversion, the first 220000 samples of the WAV file are considered, forming 220 spectrograms of 1000 samples each. These 1000-sample spectrograms are divided into 11 channels. Each channel processes the first and last k samples within the spectrogram to generate a floating-point number. Consequently, one spectrogram yields 11 distinct channels, hence breaking down the 1000-sample spectrogram into a size (11,1) vector. With 220 such spectrograms, this results in an array of size (11,220). This array represents one WAV file and serves as the model input. Below is a snapshot displaying the spectrum.
 
 ![spectrum](https://github.com/karanhk/Environmental-sound-recognition/assets/76246981/dbdaafb7-443b-4195-ad7c-0cae708c6e99)
 
@@ -52,13 +52,4 @@ To convert spectrogram into spectrum we take first 220000 samples of wav file, a
 
 # Future work
 
-In future, i'm looking forward to train CNN model based on inception network and residual network and to improve model's accuracy.
-
-# License
-
-This project is licensed under the Apache 2.0 License - see the <a href="https://github.com/karanhk/Environmental-Sound-Recogniser/blob/main/LICENSE">LICENSE</a>
-file for details
-
-# Connect with me
-
-Give your feedback at : karanhadiyal65@gmail.com
+In the future, I look forward to using a Recurrent Neural Network model to determine which model provides me with greater accuracy.
